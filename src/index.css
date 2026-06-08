@@ -42,9 +42,14 @@ body {
 }
 
 .prehod-page {
+  --parallax-cover-image: 0px;
+  --parallax-streets-frame: 0px;
+  --parallax-merch-left: 0px;
+  --parallax-merch-right: 0px;
+  --parallax-band: 0px;
   position: relative;
   width: 100vw;
-  min-height: 492.708333vw;
+  min-height: 510vw;
   overflow: hidden;
   background: #d9d9d9;
   color: #fff;
@@ -74,12 +79,15 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
+  transform: translate3d(0, var(--parallax-cover-image), 0);
+  will-change: transform;
 }
 
 .cover-title,
 .album-callout,
 .streets-ticker,
 .merch-title,
+.members-title,
 .price {
   position: absolute;
   z-index: 10;
@@ -112,14 +120,7 @@ body {
 }
 
 .frame-corner {
-  position: absolute;
-  z-index: 5;
-  width: 0.833333vw;
-  height: 0.833333vw;
-  border-color: #1f1f1f;
-  border-style: solid;
-  border-width: 0.104167vw 0 0 0.104167vw;
-  pointer-events: none;
+  display: none;
 }
 
 .frame-corner-tl {
@@ -147,11 +148,13 @@ body {
 
 .streets-frame {
   position: absolute;
-  left: 12.5vw;
+  left: 0;
   top: 93.385417vw;
-  width: 75vw;
+  width: 100vw;
   height: 46.5625vw;
   overflow: hidden;
+  transform: translate3d(0, var(--parallax-streets-frame), 0);
+  will-change: transform;
 }
 
 .streets-image {
@@ -161,7 +164,7 @@ body {
 }
 
 .streets-ticker {
-  left: 48.984375vw;
+  left: 50%;
   top: 111.458333vw;
   transform: translateX(-50%);
   white-space: nowrap;
@@ -186,16 +189,19 @@ body {
 
 .merch-image {
   top: 181.666667vw;
-  width: 53.333333vw;
-  height: 53.333333vw;
+  width: 50vw;
+  height: 50vw;
+  will-change: transform;
 }
 
 .merch-image-left {
-  left: -1.875vw;
+  left: 0;
+  transform: translate3d(0, var(--parallax-merch-left), 0);
 }
 
 .merch-image-right {
-  left: 46.666667vw;
+  left: 50vw;
+  transform: translate3d(0, var(--parallax-merch-right), 0);
 }
 
 .price {
@@ -222,4 +228,175 @@ body {
   top: 246.354167vw;
   width: 112.5vw;
   height: 70vw;
+  transform: translate3d(0, var(--parallax-band), 0);
+  will-change: transform;
+}
+
+.members-section {
+  position: absolute;
+  left: 0;
+  top: 336.197917vw;
+  width: 100vw;
+  height: 156.25vw;
+  background:
+    linear-gradient(rgb(0 0 0 / 10%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(0 0 0 / 10%) 1px, transparent 1px),
+    #d9d9d9;
+  background-size: 12.5vw 12.5vw;
+  color: #b8b8b8;
+}
+
+.members-title {
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  text-align: center;
+  font-size: 7.193594vw;
+  letter-spacing: -0.791297vw;
+}
+
+.members-grid {
+  position: absolute;
+  inset: 18.75vw 0 0;
+}
+
+.member-name {
+  position: absolute;
+  z-index: 12;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #b8b8b8;
+  cursor: crosshair;
+  font: inherit;
+  font-size: 7.193594vw;
+  font-weight: 600;
+  letter-spacing: -0.791297vw;
+  line-height: 0.8;
+  mix-blend-mode: difference;
+  text-align: center;
+  text-transform: uppercase;
+  transition: color 120ms steps(2, jump-none), transform 120ms steps(2, jump-none);
+}
+
+.member-name:hover,
+.member-name:focus-visible {
+  z-index: 80;
+  color: #fff;
+  outline: 0;
+  transform: translateY(-0.4vw);
+}
+
+.member-name-1 {
+  left: 20.5vw;
+  top: 15.833333vw;
+}
+
+.member-name-2 {
+  left: 55vw;
+  top: 27.1875vw;
+}
+
+.member-name-3 {
+  left: 75.875vw;
+  top: 45.052083vw;
+}
+
+.member-name-4 {
+  left: 30.208333vw;
+  top: 60.364583vw;
+}
+
+.member-name-5 {
+  left: 59.791667vw;
+  top: 80.260417vw;
+}
+
+.member-preview {
+  position: fixed;
+  z-index: 70;
+  display: block;
+  width: min(58vw, 700px);
+  aspect-ratio: 3 / 2;
+  max-width: none;
+  border: 0.15625vw solid #111;
+  object-fit: cover;
+  opacity: 1;
+  pointer-events: none;
+  box-shadow: 0.625vw 0.625vw 0 #111;
+  filter: grayscale(0.15) contrast(1.08);
+  transform-origin: center;
+  animation: member-preview-in 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.member-preview-1 {
+  left: 67vw;
+  top: 43vh;
+  transform: translate(-50%, -50%) rotate(-1.25deg);
+}
+
+.member-preview-2 {
+  left: 31vw;
+  top: 52vh;
+  transform: translate(-50%, -50%) rotate(1.75deg);
+}
+
+.member-preview-3 {
+  left: 54vw;
+  top: 31vh;
+  transform: translate(-50%, -50%) rotate(-3deg);
+}
+
+.member-preview-4 {
+  left: 72vw;
+  top: 58vh;
+  transform: translate(-50%, -50%) rotate(2.25deg);
+}
+
+.member-preview-5 {
+  left: 39vw;
+  top: 36vh;
+  transform: translate(-50%, -50%) rotate(-2deg);
+}
+
+@keyframes member-preview-in {
+  from {
+    opacity: 0;
+    filter: grayscale(1) contrast(1.25);
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.92);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-image,
+  .cover-title,
+  .album-callout,
+  .streets-frame,
+  .streets-image,
+  .streets-ticker,
+  .merch-image,
+  .member-preview,
+  .price,
+  .band-image {
+    transform: none;
+  }
+
+  .album-callout,
+  .streets-ticker,
+  .merch-title,
+  .price {
+    transform: translateX(-50%);
+  }
+
+  .member-name:hover,
+  .member-name:focus-visible {
+    transform: none;
+  }
+
+  .member-preview {
+    animation: none;
+    transform: translate(-50%, -50%);
+  }
 }
